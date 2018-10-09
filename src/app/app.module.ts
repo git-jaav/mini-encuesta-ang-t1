@@ -8,11 +8,16 @@ import { MaterialModule } from './material/material.module';
 import { NavegadorMainComponent } from './pages/navegador-main/navegador-main.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
+import { EncuestaComponent } from './pages/encuesta/encuesta.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TemaComponent } from './pages/tema/tema.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavegadorMainComponent
+    NavegadorMainComponent,
+    EncuestaComponent,
+    TemaComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +29,8 @@ import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, Mat
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

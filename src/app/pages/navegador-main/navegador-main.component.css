@@ -10,3 +10,8 @@
   position: sticky;
   top: 0;
 }
+
+.mat-toolbar.mat-primary {
+  background: #3fb57f;
+  color: #fff;
+}

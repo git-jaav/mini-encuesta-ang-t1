@@ -7,11 +7,34 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="!(isHandset$ | async)">
     <mat-toolbar color="primary">Menu</mat-toolbar>
+
+    <!--
+    <mat-divider></mat-divider>
+    <button mat-menu-item (click)="sidenav.toggle()" routerLink="/temas" style="cursor: pointer">
+      <mat-icon>location_on</mat-icon>
+      <span>Mi Registro</span>
+    </button>
+    <mat-divider></mat-divider>
+    <button mat-menu-item (click)="sidenav.toggle()" routerLink="/encuesta" style="cursor: pointer">
+      <mat-icon>location_on</mat-icon>
+      <span>Registro de Encuestas</span>
+    </button>
+    <mat-divider></mat-divider>
+    <button mat-menu-item (click)="sidenav.toggle()" routerLink="/temas" style="cursor: pointer">
+      <mat-icon>location_on</mat-icon>
+      <span>emas de Encuesta</span>
+    </button>
+    -->
+  
     <mat-nav-list>
-      <a mat-list-item href="#">Link 1</a>
-      <a mat-list-item href="#">Link 2</a>
-      <a mat-list-item href="#">Link 3</a>
+      <a mat-list-item href="#">Mi Registro</a>
+      <mat-divider></mat-divider>
+      <a mat-list-item href="/encuesta">Registro de Encuestas</a>
+      <mat-divider></mat-divider>
+      <a mat-list-item href="/temas">Temas de Encuesta</a>
+      <mat-divider></mat-divider>
     </mat-nav-list>
+  
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
@@ -23,8 +46,13 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>mini-encuesta-ang-t1</span>
+      <span>{{tituloPrincipal}}</span>
     </mat-toolbar>
     <!-- Add Content Here -->
+    <!--
+    <app-encuesta></app-encuesta>
+    <router-outlet></router-outlet>
+     -->
+     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
