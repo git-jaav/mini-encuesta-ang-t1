@@ -42,4 +42,9 @@ export class EncuestaComponent implements OnInit {
       }
     });
   }  
+
+  openDialog() {
+    
+  }
+
 }

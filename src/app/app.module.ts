@@ -11,13 +11,15 @@ import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, Mat
 import { EncuestaComponent } from './pages/encuesta/encuesta.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TemaComponent } from './pages/tema/tema.component';
+import { EncuestaRegistroComponent } from './pages/encuesta/encuesta-registro/encuesta-registro.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavegadorMainComponent,
     EncuestaComponent,
-    TemaComponent
+    TemaComponent,
+    EncuestaRegistroComponent
   ],
   imports: [
     BrowserModule,
