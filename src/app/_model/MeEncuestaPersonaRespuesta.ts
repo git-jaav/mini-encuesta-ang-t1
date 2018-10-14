@@ -1,4 +1,6 @@
-export class MeEncuestaPersonaRespuesta {
+import { EntidadJson } from "./EntidadJson";
+
+export class MeEncuestaPersonaRespuesta extends EntidadJson  {
 
 	enperEncuestaPersonaId : Number;
 	enperApellidoMaterno : string;

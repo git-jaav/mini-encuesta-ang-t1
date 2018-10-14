@@ -15,8 +15,10 @@ export class EncuestaPersonaRespuestaService {
 
   constructor(private httpClient: HttpClient) { }
 
-  obtenerRegistrosPorEncuesta(codigoEncuesta : string) {
-    return this.httpClient.get<MeEncuestaPersonaRespuesta[]>(`${this.urlSevice}/listar/${codigoEncuesta}`);
+  obtenerRegistrosPorEncuesta(codigoEncuesta : string, 
+          page: number, size: number) {    
+    return this.httpClient.get<MeEncuestaPersonaRespuesta[]>(
+      `${this.urlSevice}/listar/pag/${page}/${size}/${codigoEncuesta}`);
   }
 
 

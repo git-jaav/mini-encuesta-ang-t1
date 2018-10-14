@@ -20,23 +20,31 @@ export class EncuestaComponent implements OnInit {
   constructor(
     private encuestaPersonaRespuestaService: EncuestaPersonaRespuestaService
   ) { 
-    this.dataSource = new MatTableDataSource<MeEncuestaPersonaRespuesta>();
-    this.totalElementos = 10; //HARD **
+    this.dataSource = new MatTableDataSource<MeEncuestaPersonaRespuesta>();    
   }
 
   ngOnInit() {
-    this.cargarTabla(0, 100, false);
+    this.cargarTabla(0, 50, false);
   }
 
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+    
   mostrarMas(event){
     this.cargarTabla(event.pageIndex, event.pageSize, true);
   }
 
   cargarTabla(pageIndex: number, pageSize: number, desdePaginador: boolean){
-    this.encuestaPersonaRespuestaService.obtenerRegistrosPorEncuesta(CODIGO_ENCUESTA_DEF).subscribe((datos) => {
-      let registros = JSON.parse(JSON.stringify(datos)).content;
-      this.dataSource = new MatTableDataSource<MeEncuestaPersonaRespuesta>(registros);
-
+    this.encuestaPersonaRespuestaService
+    .obtenerRegistrosPorEncuesta(CODIGO_ENCUESTA_DEF,pageIndex,pageSize).subscribe((datos) => {
+      var dataJson = JSON.stringify(datos);
+      let registros = JSON.parse(dataJson);      
+      if(registros != null && registros.length > 0){
+        console.log('CCCCC::'+registros[0]);
+        this.dataSource = new MatTableDataSource<MeEncuestaPersonaRespuesta>(registros);
+        this.totalElementos = registros[0].contadorTotal;  
+      }
       if(!desdePaginador){
         this.dataSource.paginator = this.paginator;
       }
