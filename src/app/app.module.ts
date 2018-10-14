@@ -13,13 +13,20 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TemaComponent } from './pages/tema/tema.component';
 import { EncuestaRegistroComponent } from './pages/encuesta/encuesta-registro/encuesta-registro.component';
 
+import { LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { TokenInterceptorService } from './_service/token-interceptor.service';
+import { LogoutComponent } from './pages/logout/logout.component';
+import { SecurityComponent } from './pages/security/security.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     NavegadorMainComponent,
     EncuestaComponent,
     TemaComponent,
-    EncuestaRegistroComponent
+    EncuestaRegistroComponent,
+    LogoutComponent,
+    SecurityComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +41,13 @@ import { EncuestaRegistroComponent } from './pages/encuesta/encuesta-registro/en
     MatListModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    },
+    { provide: LocationStrategy, useClass: PathLocationStrategy }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
