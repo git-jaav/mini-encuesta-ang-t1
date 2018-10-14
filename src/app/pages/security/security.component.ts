@@ -12,7 +12,7 @@ import { Location, LocationStrategy, PathLocationStrategy } from '@angular/commo
 })
 export class SecurityComponent implements OnInit {
 
-  constructor(
+  constructor(    
     private router: Router,
     private route: ActivatedRoute,
     private serviceSecurity: SecurityService,
@@ -20,21 +20,28 @@ export class SecurityComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.route.fragment.subscribe((fragment) => {
-        let token;
-        try{                  
-          token = fragment.split('&')[0].split('=')[1];
-        }catch(e){
-          this.serviceSecurity.cerrarSesion();
-        }
-        console.log('TOKEN AA:::'+token);
-        sessionStorage.setItem(TOKEN_NAME, token);
-        this.serviceSecurity.validarToken().subscribe((data:any) => {
-          sessionStorage.setItem(PARAM_USUARIO, JSON.stringify(data.body));
-          console.log('TOKEN BBB:::'+data);
+    this.route.fragment.subscribe((fragment) => {
+      let token;
+      try{                  
+        token = fragment.split('&')[0].split('=')[1];
+      }catch(e){
+        this.serviceSecurity.cerrarSesion();
+      }        
+      sessionStorage.setItem(TOKEN_NAME, token);
+      this.serviceSecurity.validarToken().subscribe((data:any) => {
+        var credential =  JSON.parse(JSON.stringify(data.body));
+        sessionStorage.setItem(PARAM_USUARIO,  JSON.stringify(data.body));
+        console.log('TOKEN BBB:::'+ data.body);
+
+        //pagina def
+        if(this.serviceSecurity.esRoleAdmin()){
           this.router.navigate(['/encuesta']);
-        });
-    });
+        }else{
+          this.router.navigate(['/encuesta/registro']);
+        }
+        
+      });
+    });               
   }
 
 }

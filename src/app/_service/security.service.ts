@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HOST_BACKEND, PARAM_USUARIO, URL_LOGOUT_AWS } from '../_shared/constants';
+import { HOST_BACKEND, PARAM_USUARIO, URL_LOGOUT_AWS, CODE_ROLE_ADMIN } from '../_shared/constants';
 import { HttpClient } from '@angular/common/http';
 import { Location } from '@angular/common';
 
@@ -37,7 +37,7 @@ export class SecurityService {
     let rpta = false;
     if(usuario.authorities !== null) {
       usuario.authorities.forEach(element => {
-        if(element.authority == "ROLE_ADMIN"){   
+        if(element.authority == CODE_ROLE_ADMIN){   
           rpta = true;
         }
       });

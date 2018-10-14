@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HOST_BACKEND } from '../_shared/constants';
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject,  } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { MeEncuestaPersonaRespuesta } from '../_model/MeEncuestaPersonaRespuesta';
 
@@ -13,7 +13,15 @@ export class EncuestaPersonaRespuestaService {
   urlSevice: string = `${HOST_BACKEND}/api/encuestapersrespuesta`;
   mensajeRegistro = new Subject<string>();
 
+  mensajeRegistroBS = new BehaviorSubject<number>(0);
+  currentMessage = this.mensajeRegistroBS.asObservable();
+
   constructor(private httpClient: HttpClient) { }
+
+  obtenerPorId(id : number) {    
+    return this.httpClient.get<MeEncuestaPersonaRespuesta[]>(
+    `${this.urlSevice}/id/${id}`);
+}
 
   obtenerRegistrosPorEncuesta(codigoEncuesta : string, 
           page: number, size: number) {    

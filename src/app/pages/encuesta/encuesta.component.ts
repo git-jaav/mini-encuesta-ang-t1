@@ -1,8 +1,11 @@
 import { Component, OnInit, ViewChild} from '@angular/core';
-import { MatPaginator, MatTableDataSource, MatDialog, MatSnackBar } from '@angular/material';
+import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { EncuestaPersonaRespuestaService } from '../../_service/encuesta-persona-respuesta.service';
 import { MeEncuestaPersonaRespuesta } from '../../_model/MeEncuestaPersonaRespuesta';
 import { CODIGO_ENCUESTA_DEF } from '../../_shared/constants';
+import {  Router } from '@angular/router';
+import { SecurityService } from '../../_service/security.service';
+
 
 @Component({
   selector: 'app-encuesta',
@@ -17,14 +20,22 @@ export class EncuestaComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   displayedColumns: string[] = ['id', 'Ap_pat', 'Ap_mat', 'Correo','fecha', 'acciones'];
 
-  constructor(
+  constructor(    
+    private router: Router,
+    private serviceSecurity: SecurityService,
     private encuestaPersonaRespuestaService: EncuestaPersonaRespuestaService
   ) { 
     this.dataSource = new MatTableDataSource<MeEncuestaPersonaRespuesta>();    
   }
 
   ngOnInit() {
-    this.cargarTabla(0, 50, false);
+    /*
+    var esAdmin = this.serviceSecurity.esRoleAdmin();
+    if(!esAdmin){
+      //this.el.nativeElement.style.display = 'none';
+    } */      
+    this.cargarTabla(0, 50, false);   
+    
   }
 
   applyFilter(filterValue: string) {
@@ -50,6 +61,25 @@ export class EncuestaComponent implements OnInit {
       }
     });
   }  
+
+  eliminarRegistro(id: number) {
+    this.encuestaPersonaRespuestaService.eliminar(id).subscribe((data) => {
+      this.encuestaPersonaRespuestaService.mensajeRegistro.next('Dato eliminado correctamente...');
+    });
+  }
+  
+  editarRegistro(id: number) {
+    console.log('editarRegistro::'+id);
+    this.encuestaPersonaRespuestaService.mensajeRegistroBS.next(id);
+    this.router.navigate(['/encuesta/registro']);
+      /*
+    this.encuestaPersonaRespuestaService.obtenerPorId(id).subscribe((data) => {
+      console.log('editarRegistro::'+id);
+      this.encuestaPersonaRespuestaService.mensajeRegistroBS.next(id);
+      this.router.navigate(['/encuesta/registro']);
+    }); */               
+  }  
+
 
   openDialog() {
     

@@ -12,7 +12,11 @@ export const CLIENT_ID = "1p27pmvf5olgukq866sg6qfl51";
 export const DOMAIN_AUTH = `https://mini-encuesta.auth.us-east-1.amazoncognito.com`;
 export const URL_LOGOUT_AWS = `${DOMAIN_AUTH}/logout?response_type=token&client_id=${CLIENT_ID}&redirect_uri=`;
 
-export const RADIO = 0.029;
-export const ZOOM = 16;
+export const MODO_NUEVO = "Nuevo";
+export const MODO_EDITAR = "Editar";
+export const MODO_VER = "Ver";
+
+export const CODE_ROLE_ADMIN = "ROLE_ADMIN";
 export const TOKEN_NAME = "token";
 export const PARAM_USUARIO = "usuario";
+export const PARAM_FLAG_ES_ADMIN = "flag_admin";

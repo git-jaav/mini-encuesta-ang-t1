@@ -1,3 +1,35 @@
-<p>
-  encuesta-registro works!
-</p>
+<div class="example-container">
+  <h2 mat-dialog-title>Registro de Encuesta</h2>
+  <!--
+  <mat-dialog-content></mat-dialog-content>
+  -->
+    <form #myform="ngForm" class="example-form" (ngSubmit)="onSubmit()">
+        <mat-toolbar>
+          <span  flex ></span>
+        <button type="submit" mat-fab color="primary"   [disabled]="myform.invalid">Guardar</button>
+        </mat-toolbar>
+        <mat-dialog-content  class="reg-conten" >
+            <mat-form-field class="example-full-width">                   
+                <input matInput name="objRegistro.enperApellidoPaterno" 
+                    [(ngModel)]="objRegistro.enperApellidoPaterno" required
+                    maxlength="100"
+                    >        
+              </mat-form-field>                 
+              <mat-form-field class="example-full-width">                   
+                  <input matInput name="objRegistro.enperApellidoMaterno" 
+                      [(ngModel)]="objRegistro.enperApellidoMaterno" required
+                      maxlength="100"
+                      >        
+              </mat-form-field>     
+              <mat-form-field>
+                  <input matInput name="objRegistro.enperApellidoNombres" 
+                      [(ngModel)]="objRegistro.enperApellidoNombres" required
+                      >
+              </mat-form-field>              
+        </mat-dialog-content>   
+
+
+      
+    </form>
+  
+</div>
