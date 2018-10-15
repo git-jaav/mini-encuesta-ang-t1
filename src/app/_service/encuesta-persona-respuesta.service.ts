@@ -11,22 +11,29 @@ import { MeEncuestaPersonaRespuesta } from '../_model/MeEncuestaPersonaRespuesta
 export class EncuestaPersonaRespuestaService {
 
   urlSevice: string = `${HOST_BACKEND}/api/encuestapersrespuesta`;
-  mensajeRegistro = new Subject<string>();
 
-  mensajeRegistroBS = new BehaviorSubject<number>(0);
-  currentMessage = this.mensajeRegistroBS.asObservable();
+  mensajeRegistro = new Subject<string>();
+  idReferenciaBS = new BehaviorSubject<number>(0);  
+  mdodoReferenciaBS = new BehaviorSubject<String>("");
+
 
   constructor(private httpClient: HttpClient) { }
 
   obtenerPorId(id : number) {    
-    return this.httpClient.get<MeEncuestaPersonaRespuesta[]>(
+    return this.httpClient.get<MeEncuestaPersonaRespuesta>(
     `${this.urlSevice}/id/${id}`);
-}
+  }
 
   obtenerRegistrosPorEncuesta(codigoEncuesta : string, 
           page: number, size: number) {    
     return this.httpClient.get<MeEncuestaPersonaRespuesta[]>(
       `${this.urlSevice}/listar/pag/${page}/${size}/${codigoEncuesta}`);
+  }
+
+  obtenerPorCodigoUsuarioPorEncuesta(codigoUsuario : string, 
+    codigoEncuesta : string, ) {    
+      return this.httpClient.get<MeEncuestaPersonaRespuesta>(
+        `${this.urlSevice}/cod_usuario/${codigoUsuario}/${codigoEncuesta}`);
   }
 
 

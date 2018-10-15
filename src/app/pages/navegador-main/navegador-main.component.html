@@ -47,7 +47,14 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span>{{tituloPrincipal}}</span>
-      <span flex  ></span>
+      <span class="fill-space"></span>
+
+      <!--
+        <span flex  ></span>
+      -->
+      
+      <mat-icon>person</mat-icon>        
+      <strong style="font-size:13px;" >{{usuarioActual}}</strong>        
       <button
         type="button"
         aria-label="Toggle sidenav"
@@ -67,10 +74,10 @@
             
     </mat-toolbar>
     <!-- Add Content Here -->
-    <!--
-    <app-encuesta></app-encuesta>
-    <router-outlet></router-outlet>
-     -->
-     <router-outlet></router-outlet>
+     <div class="example-container-main" >
+        <router-outlet></router-outlet>     
+     </div>
+              
   </mat-sidenav-content>
+  
 </mat-sidenav-container>

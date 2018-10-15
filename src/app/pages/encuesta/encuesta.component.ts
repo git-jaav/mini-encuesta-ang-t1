@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild} from '@angular/core';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { EncuestaPersonaRespuestaService } from '../../_service/encuesta-persona-respuesta.service';
 import { MeEncuestaPersonaRespuesta } from '../../_model/MeEncuestaPersonaRespuesta';
-import { CODIGO_ENCUESTA_DEF } from '../../_shared/constants';
+import { CODIGO_ENCUESTA_DEF, MODO_EDITAR } from '../../_shared/constants';
 import {  Router } from '@angular/router';
 import { SecurityService } from '../../_service/security.service';
 
@@ -18,7 +18,7 @@ export class EncuestaComponent implements OnInit {
   totalElementos: number = 0;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  displayedColumns: string[] = ['id', 'Ap_pat', 'Ap_mat', 'Correo','fecha', 'acciones'];
+  displayedColumns: string[] = ['id', 'Nombre_completo', 'Cod_Usuario', 'Correo','fecha', 'acciones'];
 
   constructor(    
     private router: Router,
@@ -65,12 +65,14 @@ export class EncuestaComponent implements OnInit {
   eliminarRegistro(id: number) {
     this.encuestaPersonaRespuestaService.eliminar(id).subscribe((data) => {
       this.encuestaPersonaRespuestaService.mensajeRegistro.next('Dato eliminado correctamente...');
+      this.refrescarListado();   
     });
   }
   
   editarRegistro(id: number) {
     console.log('editarRegistro::'+id);
-    this.encuestaPersonaRespuestaService.mensajeRegistroBS.next(id);
+    this.encuestaPersonaRespuestaService.idReferenciaBS.next(id);
+    this.encuestaPersonaRespuestaService.mdodoReferenciaBS.next(MODO_EDITAR);
     this.router.navigate(['/encuesta/registro']);
       /*
     this.encuestaPersonaRespuestaService.obtenerPorId(id).subscribe((data) => {
@@ -80,7 +82,10 @@ export class EncuestaComponent implements OnInit {
     }); */               
   }  
 
-
+  
+  refrescarListado() {
+    this.cargarTabla(0, 50, false);   
+  }
   openDialog() {
     
   }

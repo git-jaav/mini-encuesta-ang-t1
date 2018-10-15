@@ -1,35 +1,104 @@
 <div class="example-container">
-  <h2 mat-dialog-title>Registro de Encuesta</h2>
+  <h2 mat-dialog-title>Registro de Encuesta : {{modoActual}}</h2>
   <!--
   <mat-dialog-content></mat-dialog-content>
-  -->
-    <form #myform="ngForm" class="example-form" (ngSubmit)="onSubmit()">
+  -->    
+
+    <form #myform="ngForm" class="example-form" (ngSubmit)="onSubmit()" >        
         <mat-toolbar>
-          <span  flex ></span>
-        <button type="submit" mat-fab color="primary"   [disabled]="myform.invalid">Guardar</button>
+          <mat-spinner *ngIf="loadSpinerVisible"  ></mat-spinner>          
+          <span class="fill-space"></span>
+          <button type="submit" mat-fab color="primary"   
+             [disabled]="(myform.invalid  || componentReadOnly)">Guardar</button>
+          <button type="submit" mat-fab color="warn"   
+             [disabled]="modeUpdate" (click)="cancelarRegistro()"  >Cancelar</button>             
         </mat-toolbar>
+
         <mat-dialog-content  class="reg-conten" >
             <mat-form-field class="example-full-width">                   
                 <input matInput name="objRegistro.enperApellidoPaterno" 
+                    [readonly]="componentReadOnly"
                     [(ngModel)]="objRegistro.enperApellidoPaterno" required
-                    maxlength="100"
+                    placeholder="Apellido Paterno"  maxlength="45"
                     >        
               </mat-form-field>                 
               <mat-form-field class="example-full-width">                   
                   <input matInput name="objRegistro.enperApellidoMaterno" 
+                    [readonly]="componentReadOnly"
                       [(ngModel)]="objRegistro.enperApellidoMaterno" required
-                      maxlength="100"
+                      placeholder="Apellido Materno"  maxlength="45"                      
                       >        
               </mat-form-field>     
               <mat-form-field>
                   <input matInput name="objRegistro.enperApellidoNombres" 
+                      [readonly]="componentReadOnly"
+                      placeholder="Nombres"  maxlength="45"
                       [(ngModel)]="objRegistro.enperApellidoNombres" required
                       >
+              </mat-form-field>        
+              
+              <mat-form-field class="example-full-width">                   
+                  <input matInput name="objRegistro.enperEdad"  type="number"
+                      [readonly]="componentReadOnly"
+                      [(ngModel)]="objRegistro.enperEdad" required
+                      placeholder="Edad" maxlength="3" max="200"
+                      >        
+              </mat-form-field>  
+              <mat-form-field class="example-full-width">
+                  <mat-select
+                  [disabled]="componentReadOnly"
+
+                  placeholder="Sexo" name="objRegistro.enperSexo" 
+                  [(ngModel)]="objRegistro.enperSexo" required>
+                    <mat-option value="M" > Masculino </mat-option>
+                    <mat-option value="F" > Femenino </mat-option>
+                  </mat-select>
+                </mat-form-field>              
+
+              <label>Escoja su Opción *</label>
+              <br />
+              <mat-radio-group *ngFor="let alt of listaEncuestaAlternativas"               
+                      matInput name="objRegistro.enaltId" 
+                      [(ngModel)]="objRegistro.enaltId" required
+                      >
+                      <span>
+                          <mat-radio-button [value]="alt.enaltId" 
+                            [disabled]="componentReadOnly || !modoNew"
+                            >{{alt.enaltOpcion}}
+                          </mat-radio-button>                  
+                          <br />
+                        </span>                 
+              </mat-radio-group>     
+
+              <mat-form-field class="example-full-width">
+                  <textarea matInput name="objRegistro.enperProfesion" 
+                    [readonly]="componentReadOnly"
+                    placeholder="Profesión"  maxlength="100"
+                    [(ngModel)]="objRegistro.enperProfesion" required>
+                  </textarea>
               </mat-form-field>              
+              
+              <mat-form-field class="example-full-width">
+                  <textarea matInput name="objRegistro.enperLugarTrabajo" 
+                  [readonly]="componentReadOnly"
+                    placeholder="Lugar de Trabajo"  maxlength="100"
+                    [(ngModel)]="objRegistro.enperLugarTrabajo">
+                  </textarea>
+              </mat-form-field>    
+
+              <mat-form-field class="example-full-width">                   
+                  <input matInput name="objRegistro.enperEmail" 
+                  [readonly]="componentReadOnly"
+                      [(ngModel)]="objRegistro.enperEmail" required
+                      placeholder="Correo Electrónico"  maxlength="100"                      
+                      >        
+              </mat-form-field>               
+                               
         </mat-dialog-content>   
 
 
       
     </form>
   
+   
 </div>

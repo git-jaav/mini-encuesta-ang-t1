@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { EncuestaTemaService } from '../../_service/encuesta-tema.service';
 import { MeEncuestaTema } from '../../_model/MeEncuestaTema';
+import { SecurityService } from '../../_service/security.service';
 
 @Component({
   selector: 'navegador-main',
@@ -15,6 +16,7 @@ export class NavegadorMainComponent implements OnInit {
 
   tema : MeEncuestaTema;
   tituloPrincipal : string;
+  usuarioActual : string;
   fechaActualStr : string;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -25,6 +27,7 @@ export class NavegadorMainComponent implements OnInit {
   constructor(
     private breakpointObserver: BreakpointObserver,
     private temaService: EncuestaTemaService,
+    private serviceSecurity: SecurityService
   ) {}
     
   ngOnInit() {    
@@ -39,9 +42,10 @@ export class NavegadorMainComponent implements OnInit {
       this.tema = data;
       if(this.tema != null){
         this.tituloPrincipal  = this.tema.enteTema;
-      }
-      
+      }      
     });
+
+    this.usuarioActual = this.serviceSecurity.getCodigoUsuario();
   }
 
 }

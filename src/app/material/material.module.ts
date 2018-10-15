@@ -4,7 +4,8 @@ import { CommonModule } from '@angular/common';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule, MatToolbarModule, MatIconModule, MatSidenavModule, MatMenuModule, 
   MatDividerModule, MatProgressSpinnerModule, MatCardModule, MatListModule, MatFormFieldModule, 
-  MatTableModule, MatPaginatorModule, MatInputModule, MatDialogModule, MatPaginatorIntl, MatSelectModule, MatSnackBarModule, MatGridListModule, MatProgressBarModule, MatExpansionModule}
+  MatTableModule, MatPaginatorModule, MatInputModule, MatDialogModule, MatPaginatorIntl, MatSelectModule, MatSnackBarModule, MatGridListModule, MatProgressBarModule, 
+  MatExpansionModule,MatRadioModule }
 from '@angular/material';
 import { MatPaginatorImpl } from '../_shared/mat-paginator';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -33,7 +34,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     MatSnackBarModule,
     MatGridListModule,
     MatProgressBarModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatRadioModule, 
   ],
   exports: [
     MatButtonModule,
@@ -56,7 +58,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     MatSnackBarModule,
     MatGridListModule,
     MatProgressBarModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatRadioModule
   ],
   providers : [{ provide : MatPaginatorIntl, useClass: MatPaginatorImpl }],
   declarations: []

@@ -44,4 +44,13 @@ export class SecurityService {
     }
     return rpta;
   }
+
+  getCodigoUsuario(){
+    let usuario = JSON.parse(sessionStorage.getItem(PARAM_USUARIO));
+    let codUsuario = "";
+    if(usuario !== null) {
+      codUsuario = usuario.username;
+    }
+    return codUsuario;
+  }  
 }
