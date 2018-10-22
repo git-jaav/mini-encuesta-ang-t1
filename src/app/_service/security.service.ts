@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HOST_BACKEND, PARAM_USUARIO, URL_LOGOUT_AWS, CODE_ROLE_ADMIN } from '../_shared/constants';
 import { HttpClient } from '@angular/common/http';
 import { Location } from '@angular/common';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +10,7 @@ import { Location } from '@angular/common';
 export class SecurityService {
 
   urlOauth: string = `${HOST_BACKEND}/api/security/token`;
+  seguridadReferenciaBS = new BehaviorSubject<String>("");
 
   constructor(
     private http: HttpClient,

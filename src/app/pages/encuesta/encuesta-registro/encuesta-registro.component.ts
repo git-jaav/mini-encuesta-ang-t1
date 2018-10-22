@@ -49,8 +49,7 @@ export class EncuestaRegistroComponent implements OnInit {
       }else{
         this.modoActual = MODO_NUEVO;
         
-      }
-      console.log('REGISTRO XXXX::'+modo);        
+      }      
     });
 
     /**Set ReadOnly*/
@@ -95,8 +94,7 @@ export class EncuestaRegistroComponent implements OnInit {
   inicializarRegistro(){
     //solo Admin
     if(this.securityService.esRoleAdmin()){
-      this.encuestaPersonaRespuestaService.idReferenciaBS.subscribe(id => {    
-        console.log('REGISTRO WWW::'+id);        
+      this.encuestaPersonaRespuestaService.idReferenciaBS.subscribe(id => {            
         if(id != null && id != 0){
           /**CASO A: registro a partir del listado principal*/
           this.enprId  = id;
@@ -106,8 +104,7 @@ export class EncuestaRegistroComponent implements OnInit {
             let registro = data;
             if(registro != null){
               this.objRegistro = registro;
-            }            
-            console.log('REGISTRO BB::'+data);        
+            }                        
           }); 
         }else{
           /**CASO B: registro a partir del usuario (Si existiese)*/
@@ -126,8 +123,7 @@ export class EncuestaRegistroComponent implements OnInit {
       var dataJson = JSON.stringify(datos);
       let registros = JSON.parse(dataJson);      
       if(registros != null && registros.length > 0){
-        this.listaEncuestaAlternativas = registros;        
-        console.log('CCCCC::'+registros[0]);        
+        this.listaEncuestaAlternativas = registros;                   
       }
     });
   }
@@ -149,7 +145,7 @@ export class EncuestaRegistroComponent implements OnInit {
         /**Set ReadOnly*/
         this.iniciarComponentReadOnly();
       }            
-      console.log('REGISTRO YYY::'+data);        
+      //console.log('REGISTRO YYY::'+data);        
     }); 
   }
 
@@ -160,13 +156,12 @@ export class EncuestaRegistroComponent implements OnInit {
       this.encuestaPersonaRespuestaService.guardar(this.objRegistro).subscribe((data)=>{
           this.encuestaPersonaRespuestaService.mensajeRegistro.next('Se guardaron los cambios correctamente...');
           this.loadSpinerVisible = false;   
-          console.log("REG: INFO:  "+data);             
+          //console.log("REG: INFO:  "+data);             
           this.inicializarRegistro();
       }, (error) => {
         alert("Sucedió un Error al guardar...");
         //this.encuestaPersonaRespuestaService.mensajeRegistro.next('Error al guardar...');
-        this.loadSpinerVisible = false;
-        console.log("REG: ERROR:  "+error);      
+        this.loadSpinerVisible = false;        
       });
     }else if(this.modoActual == MODO_EDITAR){
       this.setNombreCompletoRegistro();
@@ -178,8 +173,7 @@ export class EncuestaRegistroComponent implements OnInit {
         }           
       }, (error) => {
         alert("Sucedió un Error al actualizar los datos...");
-        //this.encuestaPersonaRespuestaService.mensajeRegistro.next('Error al guardar...');
-        console.log("REG: ERROR UPD:  "+error);      
+        //this.encuestaPersonaRespuestaService.mensajeRegistro.next('Error al guardar...');        
         this.loadSpinerVisible = false;
       });
     }

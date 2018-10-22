@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
-import { CODIGO_ENCUESTA_DEF } from '../../_shared/constants';
+import { CODIGO_ENCUESTA_DEF, COD_OK } from '../../_shared/constants';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { EncuestaTemaService } from '../../_service/encuesta-tema.service';
@@ -31,7 +31,16 @@ export class NavegadorMainComponent implements OnInit {
   ) {}
     
   ngOnInit() {    
+    /**set Modo actual*/
     this.inicializarValores();
+    this.serviceSecurity.seguridadReferenciaBS.subscribe(seguridadoCheck => {          
+      if(seguridadoCheck != null && seguridadoCheck == COD_OK ){
+        this.inicializarValores();
+      }else{
+        
+      }      
+    });    
+    
   }
   
   

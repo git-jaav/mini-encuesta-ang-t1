@@ -1,7 +1,11 @@
 /************* GENERALES ************/ 
 
 //URL Backend
-export const HOST_BACKEND = `http://localhost:8081`;
+
+export const HOST_BACKEND = `https://ydmsllr0q1.execute-api.us-east-1.amazonaws.com/prod`;
+//export const HOST_BACKEND = `http://loadBalancer-MiniEncuesta-T1-421414887.us-east-1.elb.amazonaws.com`;
+//export const HOST_BACKEND = `http://34.227.117.128:8081`;
+//export const HOST_BACKEND = `http://localhost:8081`;
 export const CODIGO_ENCUESTA_DEF = `LP_FAVORIT`;
 
 /************* AWS ***************/
@@ -14,6 +18,8 @@ export const URL_LOGOUT_AWS = `${DOMAIN_AUTH}/logout?response_type=token&client_
 
 export const ESTADO_ACTIVO_db = "A";
 export const ESTADO_INACTIVO_db = "I";
+export const COD_OK = "ok";
+export const COD_ERROR = "ok";
 
 export const MODO_NUEVO = "Nuevo";
 export const MODO_EDITAR = "Editar";

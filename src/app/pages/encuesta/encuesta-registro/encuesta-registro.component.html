@@ -9,9 +9,15 @@
           <mat-spinner *ngIf="loadSpinerVisible"  ></mat-spinner>          
           <span class="fill-space"></span>
           <button type="submit" mat-fab color="primary"   
-             [disabled]="(myform.invalid  || componentReadOnly)">Guardar</button>
+            matTooltip="Guardar"
+             [disabled]="(myform.invalid  || componentReadOnly)">
+             <mat-icon>save</mat-icon>
+            </button>
           <button type="submit" mat-fab color="warn"   
-             [disabled]="modoUpdate" (click)="cancelarRegistro()"  >Cancelar</button>             
+                matTooltip="Cancelar"
+             [disabled]="!modoUpdate" (click)="cancelarRegistro()"  >
+             <mat-icon>cancel</mat-icon>
+            </button>                     
         </mat-toolbar>
 
         <mat-dialog-content  class="reg-conten" >

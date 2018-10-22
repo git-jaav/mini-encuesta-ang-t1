@@ -51,8 +51,7 @@ export class EncuestaComponent implements OnInit {
     .obtenerRegistrosPorEncuesta(CODIGO_ENCUESTA_DEF,pageIndex,pageSize).subscribe((datos) => {
       var dataJson = JSON.stringify(datos);
       let registros = JSON.parse(dataJson);      
-      if(registros != null && registros.length > 0){
-        console.log('CCCCC::'+registros[0]);
+      if(registros != null && registros.length > 0){        
         this.dataSource = new MatTableDataSource<MeEncuestaPersonaRespuesta>(registros);
         this.totalElementos = registros[0].contadorTotal;  
       }
@@ -70,7 +69,7 @@ export class EncuestaComponent implements OnInit {
   }
   
   editarRegistro(id: number) {
-    console.log('editarRegistro::'+id);
+    
     this.encuestaPersonaRespuestaService.idReferenciaBS.next(id);
     this.encuestaPersonaRespuestaService.mdodoReferenciaBS.next(MODO_EDITAR);
     this.router.navigate(['/encuesta/registro']);

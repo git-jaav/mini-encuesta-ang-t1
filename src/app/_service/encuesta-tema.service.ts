@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HOST_BACKEND } from '../_shared/constants';
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 import { MeEncuestaTema } from '../_model/MeEncuestaTema';
 
 
@@ -10,8 +10,7 @@ import { MeEncuestaTema } from '../_model/MeEncuestaTema';
 })
 export class EncuestaTemaService {
 
-  urlSevice: string = `${HOST_BACKEND}/api/encuestatema`;
-  mensajeRegistro = new Subject<string>();
+  urlSevice: string = `${HOST_BACKEND}/api/encuestatema`;  
 
   constructor(private httpClient: HttpClient) { }
 
