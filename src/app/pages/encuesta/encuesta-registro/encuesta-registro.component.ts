@@ -45,18 +45,20 @@ export class EncuestaRegistroComponent implements OnInit {
     /**set Modo actual*/
     this.encuestaPersonaRespuestaService.mdodoReferenciaBS.subscribe(modo => {          
       if(modo != null && modo != ""){
-        this.modoActual = ""+modo;
+        //this.modoActual = ""+modo;
+        this.modoActual = MODO_NUEVO;     
       }else{
-        this.modoActual = MODO_NUEVO;
-        
+        this.modoActual = MODO_NUEVO;        
       }      
+
     });
 
     /**Set ReadOnly*/
     this.iniciarComponentReadOnly();
-    /**set Registro*/
-    this.inicializarRegistro();
+          /**set Registro*/
+          this.inicializarRegistro();
 
+          console.log("TRACE XXX:::ngOnInit");         
   }
 
   iniciarComponentReadOnly(){
@@ -88,11 +90,14 @@ export class EncuestaRegistroComponent implements OnInit {
       this.modoUpdate=false;
       this.modoView=false;
     }
+
+    console.log("TRACE XXX:::  iniciarComponentReadOnly");       
   }
 
 
   inicializarRegistro(){
     //solo Admin
+    console.log("TRACE XXX:::  inicializarRegistro");       
     if(this.securityService.esRoleAdmin()){
       this.encuestaPersonaRespuestaService.idReferenciaBS.subscribe(id => {            
         if(id != null && id != 0){
@@ -118,6 +123,7 @@ export class EncuestaRegistroComponent implements OnInit {
   }
 
   cargarListaAlternativas() {
+    console.log("TRACE XXX:::  cargarListaAlternativas");       
     this.listaEncuestaAlternativas = [];
     this.encuestaAlternativaService.obtenerRegistrosPorEncuesta(CODIGO_ENCUESTA_DEF).subscribe((datos) => {
       var dataJson = JSON.stringify(datos);
@@ -131,6 +137,7 @@ export class EncuestaRegistroComponent implements OnInit {
 
   /**Cargar Registro de Encuesta por CODIGO DE USUARIO ACTUAL*/ 
   cargarRegistroUsuarioActual() {
+    console.log("TRACE XXX:::  cargarRegistroUsuarioActual");     
     var codigoUsuarioActual = this.securityService.getCodigoUsuario();
     this.encuestaPersonaRespuestaService.obtenerPorCodigoUsuarioPorEncuesta(
       codigoUsuarioActual,CODIGO_ENCUESTA_DEF).subscribe((data) => {                
@@ -138,7 +145,8 @@ export class EncuestaRegistroComponent implements OnInit {
       if(registro != null){
         this.objRegistro = registro;
         if(this.securityService.esRoleAdmin()){
-          this.modoActual = MODO_EDITAR;
+          //this.modoActual = MODO_EDITAR;
+          this.modoActual = MODO_NUEVO;
         }else{
           this.modoActual = MODO_VER;
         }
@@ -150,7 +158,12 @@ export class EncuestaRegistroComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log("TRACE XXX:::  onSubmit");     
     this.loadSpinerVisible = true;
+    console.log("REG: modoActual:  "+this.modoActual); 
+    console.log("REG: data:  "+this.objRegistro); 
+    console.log("REG: event:  "+event); 
+    //this.objRegistro = event;
     if(this.modoActual == MODO_NUEVO){ 
       this.setDefaultRegistroNuevo();     
       this.encuestaPersonaRespuestaService.guardar(this.objRegistro).subscribe((data)=>{
@@ -181,6 +194,7 @@ export class EncuestaRegistroComponent implements OnInit {
   }
 
   setDefaultRegistroNuevo() {
+    console.log("TRACE XXX:::  setDefaultRegistroNuevo");     
     if(this.objRegistro != null){
       this.objRegistro.enperFechaRegistro = new Date();
       this.objRegistro.enperEstado = ESTADO_ACTIVO_db;
@@ -197,6 +211,7 @@ export class EncuestaRegistroComponent implements OnInit {
   }
 
   cancelarRegistro() {
+    console.log("TRACE XXX:::  cancelarRegistro");     
     if(this.securityService.esRoleAdmin()){
       this.router.navigate(['/encuesta']);
     }               

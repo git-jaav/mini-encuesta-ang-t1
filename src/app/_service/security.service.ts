@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HOST_BACKEND, PARAM_USUARIO, URL_LOGOUT_AWS, CODE_ROLE_ADMIN } from '../_shared/constants';
+import { HOST_BACKEND, PARAM_USUARIO, URL_LOGOUT_AWS, CODE_ROLE_ADMIN, PARAM_FLAG_ES_ADMIN } from '../_shared/constants';
 import { HttpClient } from '@angular/common/http';
 import { Location } from '@angular/common';
 import { BehaviorSubject } from 'rxjs';
@@ -35,7 +35,7 @@ export class SecurityService {
   }
 
   esRoleAdmin(){
-    let usuario = JSON.parse(sessionStorage.getItem(PARAM_USUARIO));
+    /*let usuario = JSON.parse(sessionStorage.getItem(PARAM_USUARIO));
     let rpta = false;
     if(usuario.authorities !== null) {
       usuario.authorities.forEach(element => {
@@ -44,15 +44,28 @@ export class SecurityService {
         }
       });
     }
-    return rpta;
+    return rpta;*/
+    return this.esRoleAdminTemp();
   }
 
   getCodigoUsuario(){
     let usuario = JSON.parse(sessionStorage.getItem(PARAM_USUARIO));
     let codUsuario = "";
-    if(usuario !== null) {
+    if(usuario) {
       codUsuario = usuario.username;
+    }else{
+      codUsuario = "ANONIMO"
     }
     return codUsuario;
   }  
+
+
+  esRoleAdminTemp(){
+    let rolAdmin = sessionStorage.getItem(CODE_ROLE_ADMIN);
+    if(rolAdmin && rolAdmin === PARAM_FLAG_ES_ADMIN) {
+      return true;
+    }
+    return false;
+  }
+
 }

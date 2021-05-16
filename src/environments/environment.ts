@@ -6,6 +6,15 @@ export const environment = {
   production: false
 };
 
+
+export const api = {
+
+  //domain_api: "http://localhost:8088/api/business/miniencuesta/v1/"
+  domain_api: "http://loadbalancer-me-v1-125389634.us-east-1.elb.amazonaws.com/api/business/miniencuesta/v1/"
+}
+
+
+
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

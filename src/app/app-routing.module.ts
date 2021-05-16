@@ -17,7 +17,7 @@ const routes: Routes = [
   {path: 'encuesta/registro', component: EncuestaRegistroComponent, canActivate: [GuardService]},
   {path: 'security', component: SecurityComponent},
   {path: 'logout', component: LogoutComponent},
-  {path: '**', redirectTo: 'logout', pathMatch: 'full'}  
+  {path: '**', redirectTo: 'security', pathMatch: 'full'}  
 ];
 
 @NgModule({

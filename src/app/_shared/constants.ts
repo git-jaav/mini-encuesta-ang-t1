@@ -28,4 +28,4 @@ export const MODO_VER = "Ver";
 export const CODE_ROLE_ADMIN = "ROLE_ADMIN";
 export const TOKEN_NAME = "token";
 export const PARAM_USUARIO = "usuario";
-export const PARAM_FLAG_ES_ADMIN = "flag_admin";
+export const PARAM_FLAG_ES_ADMIN = "isAdmin";
