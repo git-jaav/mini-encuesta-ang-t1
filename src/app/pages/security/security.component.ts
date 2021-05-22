@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SecurityService } from '../../_service/security.service';
-import { TOKEN_NAME, PARAM_USUARIO, COD_OK, CODE_ROLE_ADMIN } from '../../_shared/constants';
+import { TOKEN_NAME, PARAM_USUARIO, COD_OK, CODE_ROLE_ADMIN, COD_ERROR } from '../../_shared/constants';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 
 @Component({
@@ -21,8 +21,9 @@ export class SecurityComponent implements OnInit {
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      
-      let token =  params['token'];
+      let token;
+      //me2
+      /*let token =  params['token'];
       try{         
         if(!token){
           token = PARAM_USUARIO;
@@ -30,17 +31,23 @@ export class SecurityComponent implements OnInit {
 
       }catch(e){
         this.serviceSecurity.cerrarSesion();
-      }
-      console.log("TOKEN : "+token);
+      }*/
+
+      let sesionToken = sessionStorage.getItem(TOKEN_NAME);
+      console.log("TOKEN : "+sesionToken);
       // segemento auxiliar
-      if (token) {
-        sessionStorage.setItem(CODE_ROLE_ADMIN, token);
-        sessionStorage.setItem(TOKEN_NAME, token);
+      if (sesionToken) {
+        //sessionStorage.setItem(CODE_ROLE_ADMIN, token);
+        //sessionStorage.setItem(TOKEN_NAME, token);
+        sessionStorage.setItem("VALID", COD_OK);
+        token = sesionToken;
       } else {
-        sessionStorage.setItem(CODE_ROLE_ADMIN, PARAM_USUARIO);
-        sessionStorage.setItem(TOKEN_NAME, PARAM_USUARIO);
+        //me2
+        //sessionStorage.setItem(CODE_ROLE_ADMIN, PARAM_USUARIO);
+        //sessionStorage.setItem(TOKEN_NAME, PARAM_USUARIO);
+        //sessionStorage.setItem(COD_OK, PARAM_USUARIO);
+        sessionStorage.setItem("VALID", "NO_SESSION");
       }
-      sessionStorage.setItem(TOKEN_NAME, token);
 
       if(this.serviceSecurity.esRoleAdminTemp()){
         this.router.navigate(['/encuesta']);

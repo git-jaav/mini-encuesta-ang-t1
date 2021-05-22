@@ -28,8 +28,15 @@ export class GuardService implements CanActivate {
       }
       return true;
     } else {
-      this.router.navigate(['logout']);
-    }
+      switch (state.url) {
+        case '/temas':
+        case '/encuesta':          
+          this.router.navigate(['encuesta/registro']);  
+          return false;
+      }
+      return true;
+      //this.router.navigate(['logout']);
+    } 
     return false;
   }
 }

@@ -19,7 +19,7 @@ export const URL_LOGOUT_AWS = `${DOMAIN_AUTH}/logout?response_type=token&client_
 export const ESTADO_ACTIVO_db = "A";
 export const ESTADO_INACTIVO_db = "I";
 export const COD_OK = "ok";
-export const COD_ERROR = "ok";
+export const COD_ERROR = "error";
 
 export const MODO_NUEVO = "Nuevo";
 export const MODO_EDITAR = "Editar";
