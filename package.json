@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:docker": "ng build --prod --baseHref /me2/",
     "build-prod": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
