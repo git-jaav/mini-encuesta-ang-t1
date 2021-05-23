@@ -15,5 +15,9 @@ RUN npm run build:docker
 
 #Segunda Etapa
 FROM nginx:1.17.1-alpine
+
+#conf
+COPY nginx.conf /etc/nginx/nginx.conf
+
 #copiar a share de nginx
-COPY --from=build-step /app/dist/mini-encuesta-ang-t1 /usr/share/nginx/html/m2
+COPY --from=build-step /app/dist/mini-encuesta-ang-t1 /usr/share/nginx/html/me2
